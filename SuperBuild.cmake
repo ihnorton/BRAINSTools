@@ -65,6 +65,7 @@ if(${LOCAL_PROJECT_NAME}_USE_QT)
 find_package(Qt4 REQUIRED)
 endif()
 
+
 #-----------------------------------------------------------------------------
 # Enable and setup External project global properties
 #-----------------------------------------------------------------------------
@@ -142,6 +143,7 @@ option(${PROJECT_NAME}_BUILD_DICOM_SUPPORT "Build Dicom Support" ON)
 set(${LOCAL_PROJECT_NAME}_DEPENDENCIES DCMTK ITKv4 SlicerExecutionModel)
 
 list(APPEND ${LOCAL_PROJECT_NAME}_DEPENDENCIES teem)
+list(APPEND ${LOCAL_PROJECT_NAME}_DEPENDENCIES TBB)
 #list(APPEND ${LOCAL_PROJECT_NAME}_DEPENDENCIES Boost)
 
 if(BUILD_STYLE_UTILS)
@@ -237,6 +239,18 @@ mark_as_superbuild(
     SlicerExecutionModel_DEFAULT_CLI_INSTALL_ARCHIVE_DESTINATION:PATH
   ALL_PROJECTS
   )
+
+
+
+if(${LOCAL_PROJECT_NAME}_USE_TBB)
+  mark_as_superbuild(
+    VARS
+     TBB_ROOT:PATH
+     TBB_BUILD_DIR:PATH
+     TBB_BUILD_PREFIX:STRING
+    ALL_PROJECTS
+   )
+endif()
 
 if(${LOCAL_PROJECT_NAME}_USE_QT)
   mark_as_superbuild(
