@@ -20,7 +20,8 @@ include(ExternalData)
 
 ## Configure the standard version
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/ExtendedAtlasDefinition.xml.in
-  ${ATLAS_INSTALL_DIRECTORY}/ExtendedAtlasDefinition.xml @ONLY IMMEDIATE)
+  ${ATLAS_INSTALL_DIRECTORY}/ExtendedAtlasDefinition.xml
+  @ONLY IMMEDIATE)
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/ExtendedAtlasDefinition.xml.in
   DESTINATION ${ATLAS_INSTALL_DIRECTORY}/ USE_SOURCE_PERMISSIONS)
 

@@ -32,6 +32,7 @@ FindITKUtil(BRAINSFit_ITK
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/BRAINSFitCommonLib.h.in
   ${CMAKE_CURRENT_BINARY_DIR}/BRAINSFitCommonLib.h
+  IMMEDIATE @ONLY
   )
 
 set(ALL_PROGS_LIST

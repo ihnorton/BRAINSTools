@@ -30,6 +30,7 @@ FindITKUtil(BRAINSResample_ITK
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/BRAINSResampleCommonLib.h.in
   ${CMAKE_CURRENT_BINARY_DIR}/BRAINSResampleCommonLib.h
+  IMMEDIATE @ONLY
   )
 
 set(ALL_PROGS_LIST

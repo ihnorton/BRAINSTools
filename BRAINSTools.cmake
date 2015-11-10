@@ -97,7 +97,7 @@ if(BUILD_TESTING AND NOT Slicer_BUILD_BRAINSTOOLS)
   configure_file(
     CMake/CTestCustom.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/CTestCustom.cmake
-    @ONLY)
+    IMMEDIATE @ONLY)
 endif()
 
 # Some test are failing due to inadequate test construction, but

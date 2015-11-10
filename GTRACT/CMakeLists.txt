@@ -72,7 +72,8 @@ link_libraries( ${VTK_LIBRARIES} )
 #-----------------------------------------------------------------------------
 # Configure files with settings for use by the build.
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/gtractConfigure.h.in
-  ${CMAKE_CURRENT_BINARY_DIR}/gtractConfigure.h)
+  ${CMAKE_CURRENT_BINARY_DIR}/gtractConfigure.h
+  IMMEDIATE @ONLY)
 
 # Definitions for GTRACT Includes
 include_directories( ${CMAKE_CURRENT_BINARY_DIR} )

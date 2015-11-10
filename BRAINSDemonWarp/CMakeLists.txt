@@ -35,7 +35,7 @@ findITKUtil( BRAINSDemonWarp
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/BRAINSDemonWarpCommonLib.h.in
   ${CMAKE_CURRENT_BINARY_DIR}/BRAINSDemonWarpCommonLib.h
-  )
+  IMMEDIATE @ONLY )
 
 
 set(BRAINSDemonWarpTemplatesLIB_SRCS

@@ -38,6 +38,7 @@ set(configure_header_file vtkITKConfigure.h)
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/${configure_header_file}.in
   ${CMAKE_CURRENT_BINARY_DIR}/${configure_header_file}
+  IMMEDIATE @ONLY
   )
 
 # --------------------------------------------------------------------------
@@ -158,4 +159,5 @@ set(${PROJECT_NAME}_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BIN
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/vtkITKConfig.cmake.in
   ${CMAKE_CURRENT_BINARY_DIR}/vtkITKConfig.cmake
+  IMMEDIATE @ONLY
   )

@@ -37,6 +37,7 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/BRAINSToolsVersionConfig.h"
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/BRAINSCommonLib.h.in
   ${CMAKE_CURRENT_BINARY_DIR}/BRAINSCommonLib.h
+  IMMEDIATE @ONLY
   )
 
 include_directories(

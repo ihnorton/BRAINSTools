@@ -27,6 +27,7 @@ FindITKUtil(BRAINSROIAuto_ITK
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/BRAINSROIAutoCommonLib.h.in
   ${CMAKE_CURRENT_BINARY_DIR}/BRAINSROIAutoCommonLib.h
+  IMMEDIATE @ONLY
   )
 
 ###
