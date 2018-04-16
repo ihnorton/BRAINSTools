@@ -28,6 +28,14 @@ DWIDICOMConverterBase::DWIDICOMConverterBase(const DCMTKFileVector &allHeaders,
 
 }
 
+bool DWIDICOMConverterBase::IsTrueMultiframe(std::string file) const
+{
+  itk::DCMTKFileReader reader;
+  reader.SetFileName(file);
+  reader.LoadFile();
+  return reader.GetFrameCount() > 1;
+}
+
 void DWIDICOMConverterBase::LoadDicomDirectory()
 {
   //
@@ -37,7 +45,7 @@ void DWIDICOMConverterBase::LoadDicomDirectory()
   // load the volume, either single or multivolume.
   m_NSlice = this->m_InputFileNames.size();
   itk::DCMTKImageIO::Pointer dcmtkIO = itk::DCMTKImageIO::New();
-  if( this->m_InputFileNames.size() > 1 )
+  if( this->m_InputFileNames.size() > 1 && !IsTrueMultiframe(m_InputFileNames[0]))
   {
     ReaderType::Pointer reader = ReaderType::New();
     reader->SetImageIO( dcmtkIO );
@@ -398,7 +406,22 @@ void DWIDICOMConverterBase::DetermineSliceOrderIS()
  * */
 double DWIDICOMConverterBase::readThicknessFromDicom() const{
   double thickness= 0.0;
-  m_Headers[0]->GetElementDS<double>(0x0018,0x0050,1,&thickness);
+  auto header = m_Headers[0];
+  if (header->GetElementDS<double>(0x0018,0x0050, 1, &thickness, false) == EXIT_SUCCESS)
+    {
+    return thickness;
+    }
+
+  // try multiframe thickness
+  itk::DCMTKSequence funcGroupSeq, pixelMsrSeq;
+  if ((header->GetElementSQ(0x5200,0x9229, funcGroupSeq, false) == EXIT_FAILURE) ||
+      (funcGroupSeq.GetElementSQ(0x0028,0x9110, pixelMsrSeq) == EXIT_FAILURE) ||
+      (pixelMsrSeq.GetElementDS<double>(0x0018,0x0050, 1, &thickness, false) == EXIT_FAILURE))
+    {
+    std::cerr << "Missing SliceThickness: tried (0018,0050) and (0028,9110)->(0018,0050) for multiframe."
+              << std::endl;
+    throw;
+    }
   return thickness;
 }
 

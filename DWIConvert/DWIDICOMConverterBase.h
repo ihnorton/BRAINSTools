@@ -35,6 +35,8 @@ class DWIDICOMConverterBase : public DWIConverter {
   virtual void LoadFromDisk() ITK_OVERRIDE;
 
   virtual void LoadDicomDirectory();
+
+  bool IsTrueMultiframe(std::string) const;
   double readThicknessFromDicom() const;
   int getDicomSpacing(double * const spacing) const;
 
